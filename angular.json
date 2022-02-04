@@ -33,6 +33,109 @@
           }
         }
       }
+    },
+    "abc-app": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        },
+        "@schematics/angular:application": {
+          "strict": true
+        }
+      },
+      "root": "projects/abc-app",
+      "sourceRoot": "projects/abc-app/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/abc-app",
+            "index": "projects/abc-app/src/index.html",
+            "main": "projects/abc-app/src/main.ts",
+            "polyfills": "projects/abc-app/src/polyfills.ts",
+            "tsConfig": "projects/abc-app/tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "projects/abc-app/src/favicon.ico",
+              "projects/abc-app/src/assets"
+            ],
+            "styles": [
+              "projects/abc-app/src/styles.scss"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "projects/abc-app/src/environments/environment.ts",
+                  "with": "projects/abc-app/src/environments/environment.prod.ts"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "browserTarget": "abc-app:build:production"
+            },
+            "development": {
+              "browserTarget": "abc-app:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "abc-app:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/abc-app/src/test.ts",
+            "polyfills": "projects/abc-app/src/polyfills.ts",
+            "tsConfig": "projects/abc-app/tsconfig.spec.json",
+            "karmaConfig": "projects/abc-app/karma.conf.js",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "projects/abc-app/src/favicon.ico",
+              "projects/abc-app/src/assets"
+            ],
+            "styles": [
+              "projects/abc-app/src/styles.scss"
+            ],
+            "scripts": []
+          }
+        }
+      }
     }},
   "defaultProject": "xyz-lib"
 }

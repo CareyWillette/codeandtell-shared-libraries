@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'lib-xyz-lib',
+  selector: 'lib-xyz-component-A',
   template: `
     <p>
-      xyz-lib works!
+      xyz-lib component A works!
     </p>
   `,
   styles: [
